@@ -22,12 +22,23 @@ do
 		2)
 		echo "put the file name:"
 		read fileName
-		echo "put the destionation directory"
-		read directory
-		cp $fileName $directory
-		if [ $? == 0 ]; then
-			#there are no errors
-			echo "$fileName copied"
+		if [ $fileName ]; then
+			echo "the specified file not exist. Do you want to create it? Y/N"
+			read response
+			positive="Y"
+			if [ $response == $positive ]; then 
+				> $fileName
+				echo "$fileName created"
+				echo "put the destionation directory"
+				read directory
+				cp $fileName $directory
+				if [ $? == 0 ]; then
+					#there are no errors
+					echo "$fileName copied"
+				fi
+			else
+				echo "file not created"
+			fi
 		fi;;
 		3)
 		echo "put the current file name"
